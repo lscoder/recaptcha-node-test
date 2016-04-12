@@ -1,7 +1,15 @@
 var express   = require('express'),
     http      = require('http'),
-    ReCaptcha = require('../lib/reCaptcha'),
+    ReCaptcha = require('../lib/reCaptchaWreck'),
     router    = express.Router();
+
+router.post('/wreck', function(req, res, next) {
+  res.json({
+    contentType: req.get('Content-Type'),
+    secret: req.body.secret,
+    response: req.body.response
+  });
+});
 
 router.post('/', function(req, res, next) {
   var reCaptcha = ReCaptcha.new(),
